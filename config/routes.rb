@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get "courses/index"
   resource :session
   resources :passwords, param: :token
   resources :registrations, only: %i[new create]
-  resources :courses
+  resources :courses do
+    resources :lessons, only: %i[new create destroy]
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

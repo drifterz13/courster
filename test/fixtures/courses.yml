@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  author: 1
+course1:
+  title: Course 1
+  description: This is the first course.
+  author: user1
 
-two:
-  title: MyString
-  description: MyText
-  author: 1
+course_no_lesson:
+  title:  Course with No Lesson
+  description: This course has no lessons.
+  author: user2

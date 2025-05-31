@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  material_type: MyString
-  file_url: MyString
-  lesson_id: 1
+learning_material1:
+  title: Learning Material 1
+  material_type: video
+  file_url: https://example.com/video.mp4
+  lesson: lesson1
 
-two:
-  title: MyString
-  material_type: MyString
-  file_url: MyString
-  lesson_id: 1
+learning_material2:
+  title: Learning Material 2
+  material_type: pdf
+  file_url: https://example.com/document.pdf
+  lesson: lesson2

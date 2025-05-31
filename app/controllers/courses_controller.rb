@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :set_course, only: [:show, :edit, :update, :destroy]
+
   def index
     @courses = Course.all.order(:created_at)
   end
@@ -19,12 +21,26 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
     @lessons = @course.lessons.order(:order)
   end
 
+  def edit
+  end
+
+  def update
+    if @course.update(course_params)
+      redirect_to courses_path, notice: 'Course was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    @course = Course.find(params[:id])
+    if !@course.can_delete_by?(Current.user)
+      redirect_to courses_path, alert: 'You are not authorized to delete this course.'
+      return
+    end
+
     if @course.destroy
       redirect_to courses_path, notice: 'Course was successfully deleted.'
     else
@@ -34,11 +50,11 @@ class CoursesController < ApplicationController
 
   private
 
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
   def course_params
-    params.require(:course).permit(
-      :title,
-      :description,
-      :lessons_attributes => [:id, :title, :description, :_destroy]
-    )
+    params.require(:course).permit(:title, :description)
   end
 end

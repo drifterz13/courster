@@ -1,16 +1,18 @@
 class Course < ApplicationRecord
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
-  has_many :lessons, dependent: :nullify
+  has_many :lessons, dependent: :destroy
 
-  before_validation :set_lesson_order, if: -> { lessons.any? }
+  validates :title, presence: { message: "Title can't be blank" }
+  validates :description, presence: { message: "Description can't be blank" }
+  validates :author, presence: { message: "Author can't be blank" }
 
-  validates_presence_of :title, :description, :author
+  scope :with_lessons, -> (id) { includes(:lessons).find(id) }
 
-  accepts_nested_attributes_for :lessons, reject_if: :all_blank, allow_destroy: true
+  def max_lesson_order
+    lessons.maximum(:order) || 0
+  end
 
-  def set_lesson_order
-    lessons.reject(&:marked_for_destruction?).each_with_index do |lesson, index|
-      lesson.order = index + 1
-    end
+  def can_delete_by?(user)
+    self.author.id == user.id
   end
 end

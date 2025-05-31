@@ -1,13 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
+lesson1:
+  title: Lesson 1
+  description: The first lesson in the course.
   order: 1
-  course_id: 1
+  course: course1
 
-two:
-  title: MyString
-  description: MyText
-  order: 1
-  course_id: 1
+lesson2:
+  title: Lesson 2
+  description: The second lesson in the course.
+  order: 2
+  course: course1
+

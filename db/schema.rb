@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_31_085407) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_31_144317) do
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "author_id", null: false
+    t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_courses_on_author_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_085407) do
     t.string "title"
     t.string "material_type"
     t.string "file_url"
-    t.integer "lesson_id", null: false
+    t.integer "lesson_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_learning_materials_on_lesson_id"
@@ -34,10 +34,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_085407) do
     t.string "title"
     t.text "description"
     t.integer "order", null: false
-    t.integer "course_id", null: false
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_lessons_on_course_id"
+    t.index ["course_id", "order"], name: "index_lessons_on_course_id_and_order", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

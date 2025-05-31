@@ -1,5 +1,21 @@
 class Lesson < ApplicationRecord
   belongs_to :course
+  has_many :learning_materials, dependent: :destroy
 
-  validates_presence_of :title, :description, :order
+  validates :title, presence: { message: "Title can't be blank" }
+  validates :description, presence: { message: "Description can't be blank" }
+  validates :order, presence: { message: "Order can't be blank" }
+  validates :order, uniqueness: { scope: :course_id, message: "should be unique within the course" }
+  validates :order, numericality: { only_integer: true, greater_than: 0 }
+
+  before_validation :set_lesson_order
+
+  def set_lesson_order
+    max_order = self.course.lessons.maximum(:order) || 0
+    self.order = max_order + 1
+  end
+
+  def can_delete_by?(user)
+    self.course.can_delete_by?(user)
+  end
 end
