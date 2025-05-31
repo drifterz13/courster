@@ -1,0 +1,37 @@
+<h1>Create Course</h1>
+
+<%= form_with model: @course, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |form| %>
+  <% if @course.errors.any? %>
+    <%= render 'errors', course: @course %>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <h3>Lessons</h3>
+  <template data-nested-form-target="template">
+    <%= form.fields_for :lessons, Lesson.new, child_index: 'NEW_RECORD' do |lesson_fields| %>
+      <%= render "lesson_form", f: lesson_fields %>
+    <% end %>
+  </template>
+
+  <%= form.fields_for :lessons do |lesson_fields| %>
+      <%= render "lesson_form", f: lesson_fields %>
+  <% end %>
+
+  <!-- Inserted elements will be injected before that target. -->
+  <div data-nested-form-target="target"></div>
+
+  <button type="button" data-action="nested-form#add">Add lesson</button>
+
+  <div class="actions">
+    <%= form.submit "Create Course" %>
+  </div>
+<% end %>
