@@ -26,8 +26,7 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
           lesson: {
             title: "New Lesson",
             description: "Lesson content",
-            learning_material_attributes: { title: "New video", file_url: "https://example.com/video.mp4"
-            }
+            learning_material_attributes: { title: "New video", material_type: "video", media: fixture_file_upload("sample_video.mp4", "video/mp4") }
           }
         }
     end

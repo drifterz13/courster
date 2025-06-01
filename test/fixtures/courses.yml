@@ -5,6 +5,11 @@ one:
   description: This is the first course.
   author: one
 
+two:
+  title: Course 2
+  description: This is the second course.
+  author: one
+
 no_lessons:
   title:  Course with No Lesson
   description: This course has no lessons.

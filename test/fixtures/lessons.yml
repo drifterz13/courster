@@ -12,3 +12,8 @@ two:
   order: 2
   course: one
 
+no_media:
+  title: Lesson with no media
+  description: This lesson has no associated media.
+  order: 1
+  course: two

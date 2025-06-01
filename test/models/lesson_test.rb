@@ -75,11 +75,10 @@ class LessonTest < ActiveSupport::TestCase
     course = courses(:one)
     lesson = Lesson.new(title: "Lesson with Material", description: "Content for lesson", course: course)
 
-    lesson.learning_material_attributes = { title: "", file_url: "" }
+    lesson.learning_material_attributes = { title: "" }
 
     refute lesson.valid?
     assert_includes lesson.learning_material.errors[:title], "Title can't be blank"
-    assert_includes lesson.learning_material.errors[:file_url], "File URL can't be blank"
   end
 
   test "should save without learning material" do

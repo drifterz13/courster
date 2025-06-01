@@ -35,7 +35,7 @@ class LessonsController < ApplicationController
     params.require(:lesson).permit(
       :title,
       :description,
-      learning_material_attributes: [ :title, :file_url ],
+      learning_material_attributes: [ :title, :material_type, :media ],
     )
   end
 end
