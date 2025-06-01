@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 class UrlValidator < ActiveModel::EachValidator
   def self.compliant?(value)

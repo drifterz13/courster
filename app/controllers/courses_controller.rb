@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @courses = Course.all.order(:created_at)
@@ -14,7 +14,7 @@ class CoursesController < ApplicationController
     @course.author = Current.user
 
     if @course.save
-      redirect_to courses_path, notice: 'Course was successfully created.'
+      redirect_to courses_path, notice: "Course was successfully created."
     else
       render :new
     end
@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
 
   def update
     if @course.update(course_params)
-      redirect_to courses_path, notice: 'Course was successfully updated.'
+      redirect_to courses_path, notice: "Course was successfully updated."
     else
       render :edit
     end
@@ -37,14 +37,14 @@ class CoursesController < ApplicationController
 
   def destroy
     if !@course.can_delete_by?(Current.user)
-      redirect_to courses_path, alert: 'You are not authorized to delete this course.'
+      redirect_to courses_path, alert: "You are not authorized to delete this course."
       return
     end
 
     if @course.destroy
-      redirect_to courses_path, notice: 'Course was successfully deleted.'
+      redirect_to courses_path, notice: "Course was successfully deleted."
     else
-      redirect_to courses_path, alert: 'Failed to delete course.'
+      redirect_to courses_path, alert: "Failed to delete course."
     end
   end
 

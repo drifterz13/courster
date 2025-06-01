@@ -18,7 +18,7 @@ class LessonTest < ActiveSupport::TestCase
   test "should automatically assign order to lesson, given course with lessons" do
     course = courses(:one)
 
-    assert_difference('course.max_lesson_order', 1) do
+    assert_difference("course.max_lesson_order", 1) do
       next_lesson = course.lessons.create(title: "Next Lesson", description: "Content for next lesson")
       next_lesson.order
     end
@@ -27,7 +27,7 @@ class LessonTest < ActiveSupport::TestCase
   test "should automatically assign order to lesson, given course without lessons" do
     course = courses(:no_lessons)
 
-    assert_difference('course.max_lesson_order', 1) do
+    assert_difference("course.max_lesson_order", 1) do
       next_lesson = course.lessons.create(title: "Next Lesson", description: "Content for next lesson")
       next_lesson.order
     end
@@ -74,7 +74,7 @@ class LessonTest < ActiveSupport::TestCase
   test "should reject incomplete learning material" do
     course = courses(:one)
     lesson = Lesson.new(title: "Lesson with Material", description: "Content for lesson", course: course)
-    
+
     lesson.learning_material_attributes = { title: "", file_url: "" }
 
     refute lesson.valid?
