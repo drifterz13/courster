@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :registrations, only: %i[new create]
   resources :courses do
-    resources :lessons, only: %i[new create destroy]
+    resources :lessons, only: %i[show new create destroy]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

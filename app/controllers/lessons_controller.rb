@@ -1,5 +1,13 @@
 class LessonsController < ApplicationController
+  def show
+    @course = Course.find(params[:course_id])
+    @lesson = @course.lessons.find(params[:id])
+  end
+
   def new
+    @course = Course.find(params[:course_id])
+    @lesson = @course.lessons.build
+    @lesson.build_learning_material
   end
 
   def create

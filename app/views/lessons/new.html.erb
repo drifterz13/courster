@@ -1,2 +1,48 @@
-<h1>Lessons#new</h1>
-<p>Find me in app/views/lessons/new.html.erb</p>
+<h1>Add lesson to course "<%= @course.title %>"</h1>
+
+<%= form_with(model: [@course, @lesson]) do |form| %>
+  <% if @lesson.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+
+      <ul>
+        <% @lesson.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <%= form.fields_for :learning_material do |learning_material_form| %>
+    <div class="field">
+      <%= learning_material_form.label :title %>
+      <%= learning_material_form.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= learning_material_form.label :material_type %>
+      <%= learning_material_form.select :material_type,
+        [['Video', 'video'], ['Document', 'document']],
+        { include_blank: 'Select Material Type' }
+      %>
+    </div>
+
+    <div class="field">
+      <%= learning_material_form.file_field :media %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

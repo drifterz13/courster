@@ -1,0 +1,26 @@
+<h1>No. <%= @lesson.order %> <%= @lesson.title %></h1>
+
+<div>
+  <p><%= @lesson.description %></p>
+
+  <% if @lesson.learning_material %>
+    <h3>Learning Material</h3>
+    <% if @lesson.learning_material.media.attached? %>
+      <% if @lesson.learning_material.material_type == 'video' %>
+        <div class="video-container">
+          <%= video_tag @lesson.learning_material.media, controls: true, preload: 'metadata' %>
+        </div>
+      <% else %>
+        Preview is not available in this format.
+      <% end %>
+    <% else %>
+      <p>No media attached.</p>
+    <% end %>
+  <% else %>
+    <p>No learning material available for this lesson.</p>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to 'Back to Course', course_path(@course) %>
+  </div>
+</div>

@@ -1,6 +1,15 @@
 require "test_helper"
 
 class LessonsControllerTest < ActionDispatch::IntegrationTest
+  test "should render a course's lessons" do
+    sign_in users(:one)
+    course = courses(:one)
+    lesson = course.lessons.first
+
+    get course_lesson_url(course, lesson)
+    assert_response :success
+  end
+
   test "should render form to create a lesson for course" do
     sign_in users(:one)
     get new_course_lesson_url(courses(:one))
