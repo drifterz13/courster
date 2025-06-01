@@ -1,6 +1,6 @@
 class Lesson < ApplicationRecord
   belongs_to :course
-  has_many :learning_materials, dependent: :destroy
+  has_one :learning_material, dependent: :destroy
 
   validates :title, presence: { message: "Title can't be blank" }
   validates :description, presence: { message: "Description can't be blank" }
@@ -10,8 +10,10 @@ class Lesson < ApplicationRecord
 
   before_validation :set_lesson_order
 
+  accepts_nested_attributes_for :learning_material
+
   def set_lesson_order
-    max_order = self.course.lessons.maximum(:order) || 0
+    max_order = self.course&.lessons.maximum(:order) || 0
     self.order = max_order + 1
   end
 

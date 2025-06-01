@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-learning_material1:
+one:
   title: Learning Material 1
   material_type: video
   file_url: https://example.com/video.mp4
-  lesson: lesson1
+  lesson: one
 
-learning_material2:
+two:
   title: Learning Material 2
   material_type: pdf
   file_url: https://example.com/document.pdf
-  lesson: lesson2
+  lesson: two

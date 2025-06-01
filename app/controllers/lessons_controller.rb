@@ -32,6 +32,10 @@ class LessonsController < ApplicationController
   private
   
   def lesson_params
-    params.require(:lesson).permit(:title, :description)
+    params.require(:lesson).permit(
+      :title, 
+      :description,
+      learning_material_attributes: [:title, :file_url],
+    )
   end
 end

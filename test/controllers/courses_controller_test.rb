@@ -2,19 +2,19 @@ require "test_helper"
 
 class CoursesControllerTest < ActionDispatch::IntegrationTest
   test "should get courses" do
-    sign_in users(:user1)
+    sign_in users(:one)
     get courses_url
     assert_response :success
   end
 
   test "should render new course form" do
-    sign_in users(:user1)
+    sign_in users(:one)
     get new_course_url
     assert_response :success
   end
 
   test "should create course" do
-    sign_in users(:user1)
+    sign_in users(:one)
     assert_difference('Course.count', 1) do
       post courses_url, params: { course: { title: 'New course', description: 'New course description' } }
     end
@@ -28,15 +28,15 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should render edit course form" do
-    sign_in users(:user1)
-    course = courses(:course1)
+    sign_in users(:one)
+    course = courses(:one)
     get edit_course_url(course)
     assert_response :success
   end
 
   test "should update course" do
-    sign_in users(:user1)
-    course = courses(:course1)
+    sign_in users(:one)
+    course = courses(:one)
     patch course_url(course), params: { course: { title: 'Updated title', description: 'Updated description' } }
     assert_redirected_to courses_path
     assert_equal 'Course was successfully updated.', flash[:notice]
@@ -45,8 +45,8 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should delete course, given current user is course's author" do
-    sign_in users(:user1)
-    course = courses(:course1)
+    sign_in users(:one)
+    course = courses(:one)
     assert_difference('Course.count', -1) do
       delete course_url(course)
     end
@@ -55,8 +55,8 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not delete course, given current user is not course's author" do
-    sign_in users(:user2)
-    course = courses(:course1)
+    sign_in users(:two)
+    course = courses(:one)
     assert_no_difference('Course.count') do
       delete course_url(course)
     end
