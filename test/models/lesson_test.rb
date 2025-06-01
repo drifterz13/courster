@@ -5,14 +5,14 @@ class LessonTest < ActiveSupport::TestCase
     course = courses(:one)
     lesson = Lesson.new(description: "This is a lesson description.", course: course)
     refute lesson.valid?
-    assert_includes lesson.errors[:title], "Title can't be blank"
+    assert_includes lesson.errors[:title], "can't be blank"
   end
 
   test "should not save lesson without description" do
     course = courses(:one)
     lesson = Lesson.new(title: "Lesson Title", course: course)
     refute lesson.valid?
-    assert_includes lesson.errors[:description], "Description can't be blank"
+    assert_includes lesson.errors[:description], "can't be blank"
   end
 
   test "should automatically assign order to lesson, given course with lessons" do
@@ -78,7 +78,7 @@ class LessonTest < ActiveSupport::TestCase
     lesson.learning_material_attributes = { title: "" }
 
     refute lesson.valid?
-    assert_includes lesson.learning_material.errors[:title], "Title can't be blank"
+    assert_includes lesson.learning_material.errors[:title], "can't be blank"
   end
 
   test "should save without learning material" do

@@ -5,19 +5,19 @@ class CourseTest < ActiveSupport::TestCase
     course = Course.new(title: "", description: "A sample course", author: users(:one))
 
     refute course.valid?
-    assert_includes course.errors[:title], "Title can't be blank"
+    assert_includes course.errors[:title], "can't be blank"
   end
 
   test "returns error message, given blank description" do
     course = Course.new(title: "Sample Course", description: "", author: users(:one))
     refute course.valid?
-    assert_includes course.errors[:description], "Description can't be blank"
+    assert_includes course.errors[:description], "can't be blank"
   end
 
   test "returns error message, given blank author" do
     course = Course.new(title: "Sample Course", description: "A sample course", author: nil)
     refute course.valid?
-    assert_includes course.errors[:author], "Author can't be blank"
+    assert_includes course.errors[:author], "can't be blank"
   end
 
   test "returns max_lesson_order, given course with lessons" do

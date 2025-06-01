@@ -2,9 +2,9 @@ class Lesson < ApplicationRecord
   belongs_to :course
   has_one :learning_material, dependent: :destroy
 
-  validates :title, presence: { message: "Title can't be blank" }
-  validates :description, presence: { message: "Description can't be blank" }
-  validates :order, presence: { message: "Order can't be blank" }
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :order, presence: true
   validates :order, uniqueness: { scope: :course_id, message: "should be unique within the course" }
   validates :order, numericality: { only_integer: true, greater_than: 0 }
 

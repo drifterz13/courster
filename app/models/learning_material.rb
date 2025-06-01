@@ -3,20 +3,21 @@ class LearningMaterial < ApplicationRecord
 
   belongs_to :lesson
 
-  validates :title, presence: { message: "Title can't be blank" }
-  validates :media, presence: { message: "Media can't be blank" }
-  validates :allowed_media_types, presence: { message: "Media type is not allowed" }
+  validates :title, presence: true
+  validates :media, presence: true
+  validates :material_type, presence: true, inclusion: { in: %w[video document] }
+  validate :allowed_media_types, if: -> { media.attached? }
 
   def allowed_media_types
-    return false if media.blank?
-
     case material_type
     when "video"
-      media.content_type.start_with?("video/")
+      errors.add(:media, "video is not allowed") unless media.content_type.start_with?("video/")
     when "document"
-      media.content_type.start_with?("application/pdf") || media.content_type.start_with?("application/msword") || media.content_type.start_with?("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+      errors.add(:media, "document is not allowed") unless media.content_type.start_with?("application/pdf") ||
+        media.content_type.start_with?("application/msword") ||
+        media.content_type.start_with?("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     else
-      false
+      errors.add(:material_type, "not allowed")
     end
   end
 end

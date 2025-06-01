@@ -5,14 +5,19 @@ class LearningMaterialTest < ActiveSupport::TestCase
     lesson = lessons(:no_media)
     learning_material = LearningMaterial.new(title: "Test Material", material_type: "video", lesson:)
     refute learning_material.save
-    assert_includes learning_material.errors[:media], "Media can't be blank"
+    assert_includes learning_material.errors[:media], "can't be blank"
   end
 
   test "should not save learning material with invalid media type" do
     lesson = lessons(:no_media)
     learning_material = LearningMaterial.new(title: "Test Material", material_type: "unknown", lesson:)
+    learning_material.media.attach(
+      io: File.open(Rails.root.join("test", "fixtures", "files", "sample_video.mp4")),
+      filename: "sample_video.mp4",
+      content_type: "video/mp4"
+    )
     refute learning_material.save
-    assert_includes learning_material.errors[:allowed_media_types], "Media type is not allowed"
+    assert_includes learning_material.errors[:material_type], "not allowed"
   end
 
   test "should save learning material with video media" do
