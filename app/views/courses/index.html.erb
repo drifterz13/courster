@@ -1,10 +1,18 @@
-<h1>Courses</h1>
+<main class="container">
+  <h1>Available Courses</h1>
 
-<% @courses.each do |course| %>
-  <div class="course">
-    <h2><%= link_to course.title, course_path(course) %></h2>
-    <p><%= course.description %></p>
+  <div class="courses-grid">
+    <% @courses.each do |course| %>
+      <div class="course-card">
+        <img src="https://placehold.co/400x200" alt="<%= course.title %>">
+        <div class="course-card-content">
+          <h3><%= course.title %></h3>
+          <p><%= course.description %></p>
+          <%= link_to 'View Course', course_path(course), class: 'btn' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</main>
 
-<%= link_to 'New Course', new_course_path %>
+<%= link_to 'New Course', new_course_path, class: 'btn' %>

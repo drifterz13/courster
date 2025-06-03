@@ -23,6 +23,29 @@
   </head>
 
   <body>
-    <%= yield %>
+    <% if Current.user %>
+      <header class="header">
+        <div class="container">
+          <div class="logo">
+            <a href="courses.html">MyLearning</a>
+          </div>
+          <nav class="nav">
+            <ul>
+              <li><%= link_to "Courses", courses_path %></li>
+              <li><%= link_to "Logout", session_path, method: :delete %></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    <% end %>
+
+    <div>
+      <%= yield %>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 My Learning Platform. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>

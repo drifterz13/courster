@@ -1,0 +1,336 @@
+/* Basic Reset & Box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --white-color: #fff;
+    --border-color: #dee2e6;
+    --text-color: #333;
+    --heading-color: #222;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --border-radius: 5px;
+    --spacing-unit: 1rem; /* 16px */
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-unit);
+}
+
+/* Header & Navigation (Common for Courses & Course Detail) */
+.header {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    padding: var(--spacing-unit) 0;
+    margin-bottom: 2rem;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-left: 1.5rem;
+}
+
+.nav ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Forms (Login Page specific, but reusable) */
+.form-container {
+    background-color: var(--white-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 4rem auto; /* Centers the form vertically and horizontally */
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--heading-color);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade of primary */
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+/* Courses Page */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.course-card {
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.course-card-content {
+    padding: 1.5rem;
+}
+
+.course-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    color: var(--heading-color);
+}
+
+.course-card p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+/* Course Detail Page */
+.course-detail-header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 3rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.course-detail-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.course-detail-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.course-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+}
+
+.lesson-list {
+    flex: 1; /* Takes available space */
+    min-width: 300px; /* Minimum width before wrapping */
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.lesson-list h2 {
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+.lesson-list ul {
+    list-style: none;
+}
+
+.lesson-list ul li {
+    margin-bottom: 0.5rem;
+}
+
+.lesson-list ul li a {
+    display: block;
+    padding: 0.75rem 1rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lesson-list ul li a.active,
+.lesson-list ul li a:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.video-player {
+    flex: 2; /* Takes more space for the video */
+    min-width: 400px; /* Minimum width before wrapping */
+    background-color: var(--dark-color); /* Dark background for video */
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Ensures video respects border-radius */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For responsive iframe */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width * 100) */
+    height: 0;
+}
+
+.video-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.lesson-description {
+    background-color: var(--white-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+}
+
+.lesson-description h3 {
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+/* Footer (Common for all pages, optional) */
+.footer {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: var(--spacing-unit) 0;
+    margin-top: 3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav ul li {
+        margin: 0.5rem 1rem;
+    }
+
+    .course-content {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .lesson-list,
+    .video-player {
+        min-width: unset; /* Remove min-width to allow full width */
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+
+    .course-detail-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .course-detail-header p {
+        font-size: 1rem;
+    }
+}
